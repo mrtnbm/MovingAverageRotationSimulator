@@ -10,8 +10,8 @@ class StrategySimulator:
         invested_sums = [invested_sum]
 
         for i in range(1, len(trading_strategy.dates)):
-            invested_sum = trading_strategy.update(i, invested_sum)
-            invested_sums.append(invested_sum)
+            trading_strategy.update(i)
+            invested_sums.append(trading_strategy.invested_sum)
         
         return invested_sums
     

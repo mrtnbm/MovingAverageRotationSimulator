@@ -17,9 +17,7 @@ broker_params = {
     'dates': dates,
     'values_open': values_open,
     'values_close': values_close,
-    'ter': 0.0075,
     'certificate_fee': 0,
-    'spread': 0.001,
     'performance_fee': 0,
     'tax_at_rotation': True,
 }
@@ -28,9 +26,7 @@ wikifolio_params = {
     'dates': dates,
     'values_open': values_open,
     'values_close': values_close,
-    'ter': 0.0075,
     'certificate_fee': 0.0095,
-    'spread': 0.001,
     'performance_fee': 0.05,
     'tax_at_rotation': False,
 }
@@ -38,12 +34,16 @@ wikifolio_params = {
 
 broker_best_lev, broker_best_window_size = RotaryMAStrategy.calculate_best_params(
     **broker_params,
+    spread=0.0015,
+    ter=0.0075,
     window_sizes=np.arange(10, 300, 10),
     leverages=[3],
 )
 
 wikifolio_best_lev, wikifolio_best_window_size = RotaryMAStrategy.calculate_best_params(
     **wikifolio_params,
+    spread=0.0015,
+    ter=0.0075,
     window_sizes=np.arange(10, 300, 10),
     leverages=[3],
 )
@@ -52,6 +52,9 @@ assert broker_best_lev == wikifolio_best_lev and broker_best_window_size == wiki
 
 best_lev = broker_best_lev
 best_window_size = broker_best_window_size
+
+# best_lev = 3
+# best_window_size = 200
 
 print('Start date: ' + str(dates[0]))
 print('End date: ' + str(dates[-1]))
@@ -62,35 +65,59 @@ print('Best params broker: ' + str(best_lev) + ', ' + str(best_window_size))
 buy_and_hold_strategy = BuyAndHoldStrategy(
     dates=dates[best_window_size:],
     values_close=values_close[best_window_size:],
-    leverage=1.0,
     ter=0.002,
+    spread=0.0002,
+    leverage=1.0,
 )
 
-rotary_strategy_wikifolio = RotaryMAStrategy(
-    **wikifolio_params,
-    leverage=best_lev,
-    window_size=best_window_size,
-)
-
-rotary_strategy_broker = RotaryMAStrategy(
+rotary_strategy_broker_3x = RotaryMAStrategy(
     **broker_params,
-    leverage=best_lev,
+    leverage=3,
+    ter=0.0075,
+    spread=0.0015,
     window_size=best_window_size,
 )
 
+rotary_strategy_wikifolio_3x = RotaryMAStrategy(
+    **wikifolio_params,
+    leverage=3,
+    ter=0.0075,
+    spread=0.0015,
+    window_size=best_window_size,
+)
+
+rotary_strategy_broker_2x = RotaryMAStrategy(
+    **broker_params,
+    leverage=2,
+    ter=0.006,
+    spread=0.0015,
+    window_size=best_window_size,
+)
+
+rotary_strategy_wikifolio_2x = RotaryMAStrategy(
+    **wikifolio_params,
+    leverage=2,
+    ter=0.006,
+    spread=0.0015,
+    window_size=best_window_size,
+)
 
 
 StrategySimulator.simulate_print_and_plot(
     dates[best_window_size:],
     [
         buy_and_hold_strategy,
-        rotary_strategy_wikifolio,
-        rotary_strategy_broker,
+        rotary_strategy_broker_2x,
+        rotary_strategy_wikifolio_2x,
+        rotary_strategy_broker_3x,
+        rotary_strategy_wikifolio_3x,
     ],
     [
         'Buy and Hold',
-        'Rotary Wikifolio',
-        'Rotary Broker',
+        'Rotary Broker 2x',
+        'Rotary Wikifolio 2x',
+        'Rotary Broker 3x',
+        'Rotary Wikifolio 3x',
     ],
     log_scale=True,
 )
