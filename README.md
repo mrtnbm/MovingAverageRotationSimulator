@@ -2,7 +2,7 @@
 Inspiriert von dem wissenschaftlichen Paper "Leverage for the Long Run - A Systematic Approach to Managing Risk and Magnifying Returns in Stocks" von M. Gayed.
 
 Die Simulation berechnet dabei Gebühren wie TER, Spreads, Kapitalertragssteuer, Solidaritätszuschlag und (sofern eingestellt) Wikifolio Gebühren mit ein.
-Circuit Breakers. Zudem geht die Simulation davon aus, dass am Ende des Simulationszeitraum die Gewinne realisiert werden und damit Steuern auf Diese anfallen.
+Zudem geht die Simulation davon aus, dass am Ende des Simulationszeitraum die Gewinne realisiert werden und damit Steuern auf Diese anfallen.
 Als Fenstergröße wurde diejenige bestimmt, die das größte Gesamtwachtum des Kapitals bewirkt hätte. Dabei wurden alle Fenstergrößen von 10 bis 300 ausprobiert in Zehner-Schritten.
 
 Für Buy And Hold wird ein Spread von 0.0002 angenommen.
