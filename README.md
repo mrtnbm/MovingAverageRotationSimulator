@@ -62,7 +62,7 @@ TER 3x ETF: 0.75%
 | Rotary Wikifolio 3x        | x171.54  | 19.25%  | -95.59%      |
 
 
-### Ergebnisse auf NASDAQ 100 mit 260 Tage SMA (Beste Fenstergröße)
+### Ergebnisse auf NASDAQ 100 mit 240 Tage SMA (Beste Fenstergröße)
 | Strategy                    | Total Growth    | CAGR   | Max Drawdown   |
 |-----------------------------|-----------|--------|----------------|
 | Buy and Hold                | x29.36    | 12.33% | -82.98%        |
