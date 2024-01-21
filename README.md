@@ -1,10 +1,10 @@
-# Programm zur Simulation einer Leverage Rotation Strategie auf verschiedenen Aktienindizes
-
+# Programm zur Simulation einer gehebelten Rotations-Strategie
 Inspiriert von dem wissenschaftlichen Paper "Leverage for the Long Run - A Systematic Approach to Managing Risk and Magnifying Returns in Stocks" von M. Gayed.
 
 Die Simulation berechnet dabei Gebühren wie TER, Spreads, Kapitalertragssteuer, Solidaritätszuschlag und (sofern eingestellt) Wikifolio Gebühren mit ein.
 Circuit Breakers. Zudem geht die Simulation davon aus, dass am Ende des Simulationszeitraum die Gewinne realisiert werden und damit Steuern auf Diese anfallen.
 Als Fenstergröße wurde diejenige bestimmt, die das größte Gesamtwachtum des Kapitals bewirkt hätte. Dabei wurden alle Fenstergrößen von 10 bis 300 ausprobiert in Zehner-Schritten.
+
 Für Buy And Hold wird ein Spread von 0.0002 angenommen.
 Für die Rotationsstrategie wird aufgrund der geringeren Liquidität der Hebel-ETFs ein Spread von 0.0015% p.a. angenommen. Die Spreads können schwanken, dürften aber nahe an der Realität sein.
 Die Parameter der Wikifolio Simulation wurden auf 0.95% p.a. Zertifikatsgebühr und 5% Performancegebühr gesetzt.
@@ -12,16 +12,20 @@ Der Simulationszeitraum ist der 18.01.1994 bis 18.01.2024, wobei die ersten x-Ta
 Dividenten sind nicht miteinberechnet, da die ich keine (kommerziell nutzbaren) Daten dazu habe. Die tatsächlichen historischen Renditen dürften entsprechend noch etwas höher sein.
 Eine Rotation in Staatsanleihen, wie in dem Paper beschrieben wird ebenfalls nicht simuliert.
 
-Die Strategien kann man selbst manuell mit einem Broker durchführen. Dazu müsste man jeden Tag die Gleitenden Durchschnitte berechnen und je nachdem ob der ungebelte Kurs des Indizes darüber liegt kaufen bzw. ansonsten verkaufen. Für wen das zu viel Aufwand ist, hab ich auch passende Wikifolios erstellt, die die historisch besten Parameter verwenden, zu finden hier: https://www.wikifolio.com/de/de/p/lstrategies?tab=wikifolios.
+Die Strategien kann man selbst manuell mit einem Broker durchführen. Dazu müsste man jeden Tag die Gleitenden Durchschnitte berechnen und je nachdem ob der ungebelte Kurs des Indizes darüber liegt kaufen bzw. ansonsten verkaufen. Für wen das zu viel Aufwand ist, hab ich auch passende Wikifolios erstellt, die die entsprechend der Simulation historisch besten Parameter verwenden, zu finden hier:
+
+https://www.wikifolio.com/de/de/p/lstrategies?tab=wikifolios.
 
 ## S&P 500
 ### Parameter für den S&P 500
 TER Buy and Hold: 0.07%
+
 TER 2x ETF: 0.6%
+
 TER 3x ETF: 0.75%
 
 ### Ergebnisse auf S&P 500 mit 200 Tage SMA (wie im Paper)
-| Strategy                   | Growth    | CAGR  | Max Drawdown  |
+| Strategy                   | Total Growth    | CAGR  | Max Drawdown  |
 | -------------------------- | --------- | ----- | ------------- |
 | Buy and Hold               | x7.62     | 7.2%  | -56.82%       |
 | Rotary Broker 2x           | x13.17    | 9.22% | -54.1%        |
@@ -31,7 +35,7 @@ TER 3x ETF: 0.75%
 
 
 ### Ergebnisse auf S&P 500 mit 260 Tage SMA (Beste Fenstergröße)
-| Strategy                | Growth   | CAGR   | Max Drawdown   |
+| Strategy                | Total Growth   | CAGR   | Max Drawdown   |
 |-------------------------|----------|--------|----------------|
 | Buy and Hold            | x7.59    | 7.24%  | -56.82%        |
 | Rotary Broker 2x        | x26.01   | 11.9%  | -48.62%        |
@@ -43,11 +47,13 @@ TER 3x ETF: 0.75%
 ## NASDAQ 100
 ### Parameter für den NASDAQ 100
 TER Buy and Hold: 0.2%
+
 TER 2x ETF: 0.6%
+
 TER 3x ETF: 0.75%
 
 ### Ergebnisse auf NASDAQ 100 mit 200 Tage SMA (wie im Paper)
-| Strategy                   | Growth   | CAGR    | Max Drawdown |
+| Strategy                   | Total Growth   | CAGR    | Max Drawdown |
 | -------------------------- | -------- | ------- | ------------ |
 | Buy and Hold               | x29.02   | 12.21%  | -82.98%      |
 | Rotary Broker 2x           | x113.18  | 17.56%  | -88.41%      |
@@ -57,7 +63,7 @@ TER 3x ETF: 0.75%
 
 
 ### Ergebnisse auf NASDAQ 100 mit 260 Tage SMA (Beste Fenstergröße)
-| Strategy                    | Growth    | CAGR   | Max Drawdown   |
+| Strategy                    | Total Growth    | CAGR   | Max Drawdown   |
 |-----------------------------|-----------|--------|----------------|
 | Buy and Hold                | x29.36    | 12.33% | -82.98%        |
 | Rotary Broker 2x            | x316.62   | 21.9%  | -79.18%        |
